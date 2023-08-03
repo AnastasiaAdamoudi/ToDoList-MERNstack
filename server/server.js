@@ -19,9 +19,13 @@ mongoose.connect(mongoUri, {
   })
   .catch((error) => {
     console.log('Error connecting to MongoDB Atlas:', error);
-}); // connect to mongodb database created on mongodb atlas
+}); // connect to mongodb database created on mongodb atlas (cloud database) using mongoose
+// if connection is successful, log success message, else log error message
+// useNewUrlParser and useUnifiedTopology are options that are required to be set to true to avoid deprecation warnings
 
 const PORT = process.env.PORT // port to run server on
+
+const Todo = require('./models/Todo'); // import Todo model
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
