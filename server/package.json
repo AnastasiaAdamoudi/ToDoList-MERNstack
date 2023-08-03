@@ -1,0 +1,29 @@
+{
+  "name": "todo-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnastasiaAdamoudi/ToDoList-MERNstack.git"
+  },
+  "author": "Anastasia Adamoudi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AnastasiaAdamoudi/ToDoList-MERNstack/issues"
+  },
+  "homepage": "https://github.com/AnastasiaAdamoudi/ToDoList-MERNstack#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
