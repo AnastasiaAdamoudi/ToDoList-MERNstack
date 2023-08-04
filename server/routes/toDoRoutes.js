@@ -4,6 +4,7 @@ import * as toDoControllers from '../controllers/toDoControllers.js'; // import 
 export const toDoRouter = express.Router(); // create router
 
 toDoRouter.get('/', toDoControllers.getTodos); // get all todos
-toDoRouter.post('/', toDoControllers.createTodo); // create a todo
-// toDoRouter.patch('/:id', toDoControllers.updateTodo); // update a todo
-// toDoRouter.delete('/:id', toDoControllers.deleteTodo); // delete a todo
+toDoRouter.post('/to-do/new', toDoControllers.createTodo); // create a todo
+toDoRouter.patch('/edit/:id', toDoControllers.editTodo); // edit the text of a todo
+toDoRouter.patch('/complete/:id', toDoControllers.completeTodo); // mark a todo as complete
+toDoRouter.delete('/delete/:id', toDoControllers.deleteTodo); // delete a todo

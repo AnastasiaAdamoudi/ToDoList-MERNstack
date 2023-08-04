@@ -26,7 +26,11 @@ mongoose.connect(mongoUri, {
 // if connection is successful, log success message, else log error message
 // useNewUrlParser and useUnifiedTopology are options that are required to be set to true to avoid deprecation warnings
 
-app.use('/todos', toDoRouter); // use router from todoRoutes.js
+app.use('/to-do-list', toDoRouter); // use router from todoRoutes.js
+app.use('/to-do/new', toDoRouter); // use router from todoRoutes.js
+app.use('/edit/:id', toDoRouter); // use router from todoRoutes.js
+app.use('/complete/:id', toDoRouter); // use router from todoRoutes.js
+app.use('/delete/:id', toDoRouter); // use router from todoRoutes.js
 
 const PORT = process.env.PORT // port to run server on
 

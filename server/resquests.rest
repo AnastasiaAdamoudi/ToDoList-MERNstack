@@ -1,1 +1,32 @@
-GET http://localhost:3000/todos
+GET http://localhost:3000/to-do-list
+
+###
+
+POST http://localhost:3000/to-do-list/to-do/new
+Content-Type: application/json
+
+{
+  "text": "Go to work"
+}
+
+###
+
+PATCH http://localhost:3000/to-do-list/edit/64ccf165396bb848594f9120
+Content-Type: application/json
+
+{
+  "text": "Make projects"
+}
+
+###
+
+PATCH http://localhost:3000/to-do-list/complete/64ccf165396bb848594f9120
+Content-Type: application/json
+
+{
+  "complete": true
+}
+
+###
+
+DELETE http://localhost:3000/to-do-list/delete/64ccf165396bb848594f9120

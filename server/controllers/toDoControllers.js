@@ -1,27 +1,95 @@
-import Todo from '../models/toDoModel.js';
+import Todo from '../models/toDoModel.js'; // import the Todo model because we need to use it to create a new todo, update a todo, delete a todo, etc.
+import mongoose from 'mongoose'; // import mongoose to check if the id is valid or not)
 
-export async function getTodos(req, res) {
+export async function getTodos(req, res) { // async function to get all todos
     try {
-        const todos = await Todo.find();
+        const todos = await Todo.find(); // fetch all todos from the database and store them in the todos variable
 
-        res.status(200).json(todos);
+        res.status(200).json(todos); // send the todos as a json response to the client
     } catch (error) {
-        res.status(404).json({ message: error.message });
+        res.status(404).json({ message: error.message }); // if there is an error, send the error message as a json response to the client
     }
 }
 
-export async function createTodo(req, res) {
-    const todo = req.body;
+export async function createTodo(req, res) { // async function to create a new todo
+    const todotext = req.body.text; // get the text of the todo from the request body
 
-    const newTodo = new Todo({
-        ...todo
+    const newTodo = new Todo({ // create a new todo using the Todo model
+        text: todotext  // set the text of the todo to the text from the request body
     });
 
     try {
-        await newTodo.save();
+        await newTodo.save(); // save the new todo to the database
 
-        res.status(201).json(newTodo);
+        res.status(201).json(newTodo); // send the new todo as a json response to the client
     } catch (error) {
         res.status(409).json({ message: error.message });
+    }
+}
+
+export async function editTodo(req, res, id) { // async function to edit the text of a todo
+    const { id: _id } = req.params; // get the id of the todo from the request parameters
+    const todotext = req.body.text; 
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) { // check if the id is valid or not
+        return res.status(404).send('No todo with that id');
+    }
+    else {
+        try {
+            const editedTodo = await Todo.findById(_id); // fetch the todo from the database
+            if (!editedTodo) {
+                return res.status(404).send('No todo with that id'); // if there is no todo with that id, send a 404 error
+            }
+
+            editedTodo.text = todotext; // update the text of the todo to the text from the request body (the text the user wants to change the todo to)
+
+            await editedTodo.save();
+
+            res.status(200).json(editedTodo);
+        } catch (error) {
+            res.status(409).json({ message: error.message });
+        }
+    }
+}
+
+export async function completeTodo(req, res, id) { // async function to mark a todo as complete
+    const { id: _id } = req.params;
+    const complete = req.body.complete; // get the complete status from the request body (true or false)
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).send('No todo with that id');
+    }
+    else {
+        try {
+            const completedTodo = await Todo.findById(_id); // fetch the todo from the database
+            if (!completedTodo) {
+                return res.status(404).send('No todo with that id');
+            }
+
+            completedTodo.complete = complete; // update the complete status of the todo to the complete status from the request body (the complete status the user changes if they want to mark the todo as complete or not)
+
+            await completedTodo.save();
+
+            res.status(200).json(completedTodo);
+        } catch (error) {
+            res.status(409).json({ message: error.message });
+        }
+    }
+}
+
+export async function deleteTodo(req, res, id) { // async function to delete a todo
+    const { id: _id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(_id)) {
+        return res.status(404).send('No todo with that id');
+    }
+    else {
+        try {
+            await Todo.findByIdAndRemove(_id);
+            res.status(200).json({ message: 'Todo deleted successfully' });
+        }
+        catch (error) {
+            res.status(409).json({ message: error.message });
+        }
     }
 }
