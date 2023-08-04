@@ -66,21 +66,21 @@ export async function completeTodo(req, res, id) { // async function to mark a t
     const { error } = todoSchema.validate(req.params);
 
     const { id: _id } = req.params;
-    const complete = req.body.complete; // get the complete status from the request body (true or false)
-
+    
     if (!mongoose.Types.ObjectId.isValid(_id)) {
         return res.status(404).send('No todo with that id');
     }
     else {
-        const completedTodo = await Todo.findById(_id); // fetch the todo from the database
-        if (!completedTodo) {
+        const todo = await Todo.findById(_id); // fetch the todo from the database
+        if (!todo) {
             return res.status(404).send('No todo with that id');
         }
 
-        completedTodo.complete = complete; // update the complete status of the todo to the complete status from the request body (the complete status the user changes if they want to mark the todo as complete or not)
-        await completedTodo.save();
+        todo.complete = !todo.complete // if the todo is complete, mark it as incomplete, if the todo is incomplete, mark it as complete
 
-        res.status(200).json(completedTodo);
+        await todo.save();
+
+        res.status(200).json(todo);
     }
 }
 

@@ -11,21 +11,16 @@ Content-Type: application/json
 
 ###
 
-PATCH http://localhost:3000/to-do-list/edit/64ccf165396bb848594f9120
+PATCH http://localhost:3000/to-do-list/edit/64ccee2468ac01e6f0f451fc
 Content-Type: application/json
 
 {
-  "text": "Make projects"
+  "text": "Make projects!"
 }
 
 ###
 
-PATCH http://localhost:3000/to-do-list/complete/64ccf165396bb848594f9120
-Content-Type: application/json
-
-{
-  "complete": true
-}
+PUT http://localhost:3000/to-do-list/complete/64ccee2468ac01e6f0f451fc
 
 ###
 
