@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import mongoose from 'mongoose';
+
+const { Schema } = mongoose; // create mongoose schema object which is used to define the shape of documents within a collection in mongodb
 
 const TodoSchema = new Schema({
     text: {
@@ -11,8 +12,8 @@ const TodoSchema = new Schema({
         default: false
     },
     timestamp: {
-        type: String,
-        default: Date.now()
+        type: Date,
+        default: Date.now
     }
 });
 

@@ -1,7 +1,10 @@
-const express = require('express'); // allows us to handle http requests and responses
-const mongoose = require('mongoose'); // allows us to connect to mongodb database
-const cors = require('cors'); // allows us to connect to frontend from anywhere (cross origin resource sharing)
-require('dotenv').config(); // allows us to use environment variables
+import express from 'express'; // allows us to handle http requests and responses
+import mongoose from 'mongoose'; // allows us to connect to a mongodb database
+import cors from 'cors'; // allows us to connect to frontend from anywhere (cross origin resource sharing)
+import dotenv from 'dotenv'; // allows us to use environment variables
+import { toDoRouter } from './routes/toDoRoutes.js' // import router from todoRoutes.js
+
+dotenv.config();
 
 const app = express(); // create express server
 
@@ -23,9 +26,9 @@ mongoose.connect(mongoUri, {
 // if connection is successful, log success message, else log error message
 // useNewUrlParser and useUnifiedTopology are options that are required to be set to true to avoid deprecation warnings
 
-const PORT = process.env.PORT // port to run server on
+app.use('/todos', toDoRouter); // use router from todoRoutes.js
 
-const Todo = require('./models/Todo'); // import Todo model
+const PORT = process.env.PORT // port to run server on
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

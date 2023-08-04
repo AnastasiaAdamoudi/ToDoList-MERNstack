@@ -1,4 +1,4 @@
-import * as Todo from '../models/Todo.js';
+import Todo from '../models/toDoModel.js';
 
 export async function getTodos(req, res) {
     try {
@@ -10,7 +10,7 @@ export async function getTodos(req, res) {
     }
 }
 
-export async function createTodo (req, res) {
+export async function createTodo(req, res) {
     const todo = req.body;
 
     const newTodo = new Todo({
@@ -25,4 +25,3 @@ export async function createTodo (req, res) {
         res.status(409).json({ message: error.message });
     }
 }
-
