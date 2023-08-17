@@ -94,6 +94,7 @@ function App() {
             {editingTodoId === todo._id ? ( // if the todo is being edited, display the edit box
       <input
         type='text'
+        className='edit-todo-input'
         value={editedTodoText}
         onChange={e => setEditedTodoText(e.target.value)} // update the editedTodoText state variable when the user types in the edit box
       />
@@ -134,7 +135,7 @@ function App() {
               />
               <button
                 className='create-todo'
-                onClick={() => addTodo()}>Create new to-do
+                onClick={() => addTodo()}>Create
               </button>
             </div>
           </div>
