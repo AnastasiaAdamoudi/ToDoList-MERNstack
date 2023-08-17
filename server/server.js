@@ -29,8 +29,8 @@ mongoose.connect(mongoUri, {
 app.use('/to-do-list', toDoRouter); // use router from todoRoutes.js
 app.use('/to-do-list/add', toDoRouter); // use router from todoRoutes.js
 app.use('/to-do-list/edit/:id', toDoRouter); // use router from todoRoutes.js
-app.use('/complete/:id', toDoRouter); // use router from todoRoutes.js
-app.use('/delete/:id', toDoRouter); // use router from todoRoutes.js
+app.use('/to-do-list/complete/:id', toDoRouter); // use router from todoRoutes.js
+app.use('/to-do-list/delete/:id', toDoRouter); // use router from todoRoutes.js
 
 export function errorHandler(err, req, res, next) { // custom error handling middleware
   console.error(err.stack); // log the error to the console for debugging purposes (err.stack is the stack trace of the error which means the error message and the line number where the error occurred)
